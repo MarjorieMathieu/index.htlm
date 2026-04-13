@@ -1,0 +1,469 @@
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IFSU Équilibre — Présentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --lin:        #F7F3EE;
+    --ardoise:    #4A6274;
+    --ardoise-dk: #3a4f60;
+    --terra:      #C4714A;
+    --gold:       #C9A84C;
+    --gold-light: #e0c070;
+    --anthracite: #2C2C2C;
+    --gris-bleu:  #7A9AB0;
+    --slide-w: 1280px;
+    --slide-h: 720px;
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #1a1a1a;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    font-family: 'Jost', sans-serif;
+  }
+
+  #player {
+    position: relative;
+    width: var(--slide-w); height: var(--slide-h);
+    overflow: hidden;
+    background: var(--ardoise);
+  }
+
+  .slide {
+    position: absolute; inset: 0;
+    opacity: 0; pointer-events: none; overflow: hidden;
+    transition: opacity 0.9s ease;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; }
+
+  .slide::after {
+    content: ''; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 100; opacity: 0.5;
+  }
+
+  @keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
+  @keyframes riseIn  { to { opacity: 1; transform: translateY(0); } }
+
+  /* ── SLIDE 1 INTRO ── */
+  #s1 { background: var(--ardoise); }
+  #s1 .bg-lines {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(201,168,76,0.05) 60px, rgba(201,168,76,0.05) 61px);
+  }
+  #s1 .corner { position: absolute; width: 56px; height: 56px; border-color: rgba(201,168,76,0.35); border-style: solid; }
+  #s1 .corner.tl { top: 32px; left: 32px; border-width: 1px 0 0 1px; }
+  #s1 .corner.br { bottom: 32px; right: 32px; border-width: 0 1px 1px 0; }
+  #s1 .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  #s1 .rule { height: 1px; background: var(--gold); width: 0; transition: width 1s ease 0.3s; }
+  #s1 .rule.bot { transition-delay: 1.4s; }
+  #s1.active .rule { width: 180px; }
+  #s1 .brand {
+    font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300;
+    color: var(--lin); letter-spacing: 0.12em; margin: 32px 0 0;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.9s ease 0.6s, transform 0.9s ease 0.6s;
+  }
+  #s1.active .brand { opacity: 1; transform: translateY(0); }
+  #s1 .brand em { color: var(--gold); font-style: italic; }
+  #s1 .tagline {
+    font-size: 13px; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase;
+    color: rgba(247,243,238,0.55); margin: 16px 0 32px;
+    opacity: 0; transition: opacity 0.9s ease 1.1s;
+  }
+  #s1.active .tagline { opacity: 1; }
+  #s1 .sub {
+    margin-top: 44px; font-size: 13px; font-weight: 200;
+    letter-spacing: 0.22em; text-transform: uppercase; color: rgba(247,243,238,0.4);
+    opacity: 0; transition: opacity 1s ease 1.7s;
+  }
+  #s1.active .sub { opacity: 1; }
+
+  /* ── SLIDE 2 MARJORIE ── */
+  #s2 { background: var(--lin); }
+  #s2 .left-bar {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 380px;
+    background: var(--ardoise);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 56px 44px;
+  }
+  #s2 .left-bar .lbl {
+    font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+    opacity: 0; transition: opacity 0.7s ease 0.4s;
+  }
+  #s2.active .left-bar .lbl { opacity: 1; }
+  #s2 .left-bar h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300;
+    color: var(--lin); line-height: 1.15;
+    opacity: 0; transform: translateY(15px);
+    transition: opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s;
+  }
+  #s2.active .left-bar h2 { opacity: 1; transform: translateY(0); }
+  #s2 .left-bar h2 em { color: var(--gold); font-style: italic; display: block; }
+  #s2 .left-bar .rule { width: 0; height: 1px; background: var(--gold); margin: 24px 0; transition: width 0.8s ease 1s; }
+  #s2.active .left-bar .rule { width: 80px; }
+  #s2 .left-bar p { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(247,243,238,0.7); opacity: 0; transition: opacity 0.8s ease 1.2s; }
+  #s2.active .left-bar p { opacity: 1; }
+  #s2 .right {
+    position: absolute; left: 380px; right: 0; top: 0; bottom: 0;
+    padding: 64px 72px; display: flex; flex-direction: column; justify-content: center; gap: 32px;
+  }
+  #s2 .stat { display: flex; align-items: flex-start; gap: 24px; opacity: 0; transform: translateX(20px); }
+  #s2.active .stat:nth-child(1) { animation: slideIn 0.7s ease 0.8s forwards; }
+  #s2.active .stat:nth-child(2) { animation: slideIn 0.7s ease 1.0s forwards; }
+  #s2.active .stat:nth-child(3) { animation: slideIn 0.7s ease 1.2s forwards; }
+  #s2.active .stat:nth-child(4) { animation: slideIn 0.7s ease 1.4s forwards; }
+  #s2 .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--terra); line-height: 1; min-width: 90px; }
+  #s2 .stat-text { padding-top: 6px; }
+  #s2 .stat-text strong { display: block; font-size: 15px; font-weight: 500; color: var(--anthracite); margin-bottom: 4px; }
+  #s2 .stat-text span { font-size: 13px; font-weight: 300; color: var(--gris-bleu); }
+
+  /* ── SLIDE 3 YOGA ── */
+  #s3 { background: var(--ardoise-dk); }
+  #s3 .bg-shape {
+    position: absolute; right: -100px; top: -80px; width: 650px; height: 650px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,113,74,0.1) 0%, transparent 70%);
+  }
+  #s3 .header { position: absolute; top: 56px; left: 72px; opacity: 0; transition: opacity 0.7s ease 0.3s; }
+  #s3.active .header { opacity: 1; }
+  #s3 .header .lbl { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  #s3 .header h2 { font-family: 'Cormorant Garamond', serif; font-size: 54px; font-weight: 300; color: var(--lin); line-height: 1.1; }
+  #s3 .header h2 em { color: var(--gold); font-style: italic; }
+  #s3 .quote-block {
+    position: absolute; top: 56px; right: 72px; width: 340px;
+    border-left: 2px solid var(--terra); padding-left: 24px;
+    opacity: 0; transition: opacity 0.8s ease 0.8s;
+  }
+  #s3.active .quote-block { opacity: 1; }
+  #s3 .quote-block p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: rgba(247,243,238,0.75); line-height: 1.6; }
+  #s3 .quote-block cite { display: block; margin-top: 10px; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-style: normal; }
+  #s3 .principe {
+    position: absolute; top: 210px; left: 72px;
+    font-size: 13px; font-weight: 300; color: rgba(247,243,238,0.5); letter-spacing: 0.05em;
+    opacity: 0; transition: opacity 0.8s ease 1.5s;
+  }
+  #s3.active .principe { opacity: 1; }
+  #s3 .principe em { color: var(--gold); font-style: normal; }
+  #s3 .schedule { position: absolute; bottom: 60px; left: 72px; right: 72px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  #s3 .scard {
+    background: rgba(247,243,238,0.06); border: 1px solid rgba(201,168,76,0.2); border-top: 2px solid var(--terra);
+    padding: 20px 18px 16px; opacity: 0; transform: translateY(20px);
+  }
+  #s3.active .scard:nth-child(1) { animation: riseIn 0.6s ease 0.7s forwards; }
+  #s3.active .scard:nth-child(2) { animation: riseIn 0.6s ease 0.9s forwards; }
+  #s3.active .scard:nth-child(3) { animation: riseIn 0.6s ease 1.1s forwards; }
+  #s3.active .scard:nth-child(4) { animation: riseIn 0.6s ease 1.3s forwards; }
+  #s3 .scard .day { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  #s3 .scard .time { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--lin); font-weight: 300; line-height: 1; margin-bottom: 8px; }
+  #s3 .scard .loc { font-size: 12px; color: rgba(247,243,238,0.5); line-height: 1.5; margin-bottom: 10px; }
+  #s3 .scard .price { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--gold-light); font-weight: 300; }
+  #s3 .scard .maxi { font-size: 11px; color: rgba(247,243,238,0.35); letter-spacing: 0.1em; margin-top: 2px; }
+
+  /* ── SLIDE 4 MÉDITATION ── */
+  #s4 { background: var(--lin); }
+  #s4 .top-bar { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--ardoise) 0%, var(--terra) 50%, var(--gold) 100%); }
+  #s4 .col-left {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 50%;
+    background: var(--ardoise); padding: 72px 56px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  #s4 .col-left .lbl { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; opacity: 0; transition: opacity 0.7s ease 0.3s; }
+  #s4.active .col-left .lbl { opacity: 1; }
+  #s4 .col-left h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300;
+    color: var(--lin); line-height: 1.2; margin-bottom: 28px;
+    opacity: 0; transform: translateY(15px);
+    transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+  }
+  #s4.active .col-left h2 { opacity: 1; transform: translateY(0); }
+  #s4 .col-left h2 em { color: var(--gold); font-style: italic; }
+  #s4 .pill-list { display: flex; flex-direction: column; gap: 12px; }
+  #s4 .pill { display: flex; align-items: center; gap: 12px; opacity: 0; transition: opacity 0.6s ease; }
+  #s4.active .pill:nth-child(1) { transition-delay: 0.7s; opacity: 1; }
+  #s4.active .pill:nth-child(2) { transition-delay: 0.85s; opacity: 1; }
+  #s4.active .pill:nth-child(3) { transition-delay: 1.0s; opacity: 1; }
+  #s4.active .pill:nth-child(4) { transition-delay: 1.15s; opacity: 1; }
+  #s4 .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--terra); flex-shrink: 0; }
+  #s4 .pill span { font-size: 13px; font-weight: 300; color: rgba(247,243,238,0.8); }
+  #s4 .col-right {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
+    padding: 64px 52px; display: flex; flex-direction: column; justify-content: center; gap: 18px;
+  }
+  #s4 .offer-box {
+    background: white; padding: 20px 24px;
+    border-left: 3px solid var(--terra);
+    box-shadow: 0 2px 12px rgba(74,98,116,0.08);
+    opacity: 0; transform: translateX(15px);
+  }
+  #s4.active .offer-box:nth-child(1) { animation: slideIn 0.7s ease 0.6s forwards; }
+  #s4.active .offer-box:nth-child(2) { animation: slideIn 0.7s ease 0.9s forwards; }
+  #s4.active .offer-box:nth-child(3) { animation: slideIn 0.7s ease 1.2s forwards; }
+  #s4 .offer-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--anthracite); margin-bottom: 4px; }
+  #s4 .offer-box .price-tag { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--terra); margin-bottom: 4px; }
+  #s4 .offer-box .price-tag small { font-size: 14px; color: var(--gris-bleu); }
+  #s4 .offer-box p { font-size: 12px; font-weight: 300; color: var(--gris-bleu); line-height: 1.6; }
+  #s4 .honest-line { position: absolute; bottom: 22px; left: 50%; right: 0; padding: 0 52px; opacity: 0; transition: opacity 0.8s ease 1.5s; }
+  #s4.active .honest-line { opacity: 1; }
+  #s4 .honest-line p { font-size: 12px; font-weight: 300; color: var(--gris-bleu); font-style: italic; }
+  #s4 .honest-line strong { color: var(--ardoise); font-weight: 500; }
+
+  /* ── SLIDE 5 RETRAITE ── */
+  #s5 { background: var(--ardoise); }
+  #s5 .bg-geo {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 600px 400px at 25% 55%, rgba(196,113,74,0.12) 0%, transparent 100%), radial-gradient(ellipse 400px 500px at 85% 20%, rgba(201,168,76,0.07) 0%, transparent 100%);
+  }
+  #s5 .top-label { position: absolute; top: 48px; left: 72px; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--terra); opacity: 0; transition: opacity 0.7s ease 0.3s; }
+  #s5.active .top-label { opacity: 1; }
+  #s5 .main-title {
+    position: absolute; top: 76px; left: 72px;
+    font-family: 'Cormorant Garamond', serif; font-size: 66px; font-weight: 300; color: var(--lin); line-height: 1.1;
+    opacity: 0; transform: translateY(20px); transition: opacity 0.9s ease 0.5s, transform 0.9s ease 0.5s;
+  }
+  #s5.active .main-title { opacity: 1; transform: translateY(0); }
+  #s5 .main-title em { color: var(--gold); font-style: italic; display: block; }
+  #s5 .info-strip { position: absolute; top: 258px; left: 72px; right: 72px; display: flex; border: 1px solid rgba(201,168,76,0.25); }
+  #s5 .info-cell { flex: 1; padding: 22px 26px; border-right: 1px solid rgba(201,168,76,0.15); opacity: 0; }
+  #s5 .info-cell:last-child { border-right: none; }
+  #s5.active .info-cell:nth-child(1) { animation: riseIn 0.6s ease 0.8s forwards; }
+  #s5.active .info-cell:nth-child(2) { animation: riseIn 0.6s ease 1.0s forwards; }
+  #s5.active .info-cell:nth-child(3) { animation: riseIn 0.6s ease 1.2s forwards; }
+  #s5.active .info-cell:nth-child(4) { animation: riseIn 0.6s ease 1.4s forwards; }
+  #s5 .cell-lbl { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  #s5 .cell-val { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--lin); line-height: 1.3; }
+  #s5 .cell-sub { font-size: 12px; color: rgba(247,243,238,0.45); margin-top: 4px; }
+  #s5 .details { position: absolute; bottom: 64px; left: 72px; right: 72px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  #s5 .detail-item { display: flex; align-items: flex-start; gap: 14px; opacity: 0; transform: translateY(10px); }
+  #s5.active .detail-item:nth-child(1) { animation: riseIn 0.6s ease 1.1s forwards; }
+  #s5.active .detail-item:nth-child(2) { animation: riseIn 0.6s ease 1.2s forwards; }
+  #s5.active .detail-item:nth-child(3) { animation: riseIn 0.6s ease 1.3s forwards; }
+  #s5.active .detail-item:nth-child(4) { animation: riseIn 0.6s ease 1.4s forwards; }
+  #s5 .detail-icon { width: 30px; height: 30px; border: 1px solid rgba(201,168,76,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; margin-top: 2px; }
+  #s5 .detail-text strong { display: block; font-size: 14px; font-weight: 500; color: var(--lin); margin-bottom: 2px; }
+  #s5 .detail-text span { font-size: 12px; color: rgba(247,243,238,0.5); font-weight: 300; }
+
+  /* ── SLIDE 6 CTA ── */
+  #s6 { background: var(--lin); }
+  #s6 .top-block { position: absolute; top: 0; left: 0; right: 0; height: 50%; background: var(--ardoise); }
+  #s6 .card {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.96);
+    width: 660px; background: white;
+    border: 1px solid rgba(201,168,76,0.25); border-top: 3px solid var(--terra);
+    padding: 48px 64px; text-align: center;
+    box-shadow: 0 20px 60px rgba(74,98,116,0.15);
+    opacity: 0; transition: opacity 0.9s ease 0.3s, transform 0.9s ease 0.3s;
+  }
+  #s6.active .card { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  #s6 .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--anthracite); letter-spacing: 0.08em; margin-bottom: 6px; }
+  #s6 .logo-text em { color: var(--terra); font-style: italic; }
+  #s6 .sub { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gris-bleu); margin-bottom: 28px; }
+  #s6 .rule { width: 50px; height: 1px; background: var(--gold); margin: 0 auto 28px; }
+  #s6 .contact-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; opacity: 0; transition: opacity 0.8s ease 0.9s; }
+  #s6.active .contact-grid { opacity: 1; }
+  #s6 .contact-row { display: flex; align-items: center; justify-content: center; gap: 12px; }
+  #s6 .c-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris-bleu); min-width: 100px; text-align: right; }
+  #s6 .c-val { font-size: 15px; font-weight: 400; color: var(--anthracite); }
+  #s6 .booking-btn {
+    display: inline-block; background: var(--terra); color: white;
+    padding: 14px 40px; font-size: 12px; font-weight: 400;
+    letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none;
+    opacity: 0; transition: opacity 0.8s ease 1.2s;
+  }
+  #s6.active .booking-btn { opacity: 1; }
+  #s6 .bottom-note { position: absolute; bottom: 32px; left: 0; right: 0; text-align: center; font-size: 12px; font-weight: 300; color: var(--gris-bleu); font-style: italic; opacity: 0; transition: opacity 0.8s ease 1.5s; }
+  #s6.active .bottom-note { opacity: 1; }
+
+  /* ── PROGRESS ── */
+  #progress-bar { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--gold); transition: width linear; z-index: 200; }
+
+  /* ── CONTROLS ── */
+  #controls { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; z-index: 300; }
+  .ctrl-btn { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.25); background: rgba(0,0,0,0.35); color: #fff; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: background 0.2s, border-color 0.2s; backdrop-filter: blur(4px); }
+  .ctrl-btn:hover { background: rgba(196,113,74,0.5); border-color: var(--terra); }
+  #slide-counter { font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); min-width: 40px; text-align: center; }
+
+  /* ── DOTS ── */
+  #dots { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 300; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.4); cursor: pointer; transition: background 0.3s, border-color 0.3s; }
+  .dot.active { background: var(--gold); border-color: var(--gold); }
+</style>
+</head>
+<body>
+<div id="player">
+
+  <div id="progress-bar"></div>
+
+  <!-- SLIDE 1 -->
+  <div class="slide" id="s1">
+    <div class="bg-lines"></div>
+    <div class="corner tl"></div>
+    <div class="corner br"></div>
+    <div class="center">
+      <div class="rule"></div>
+      <div class="brand">IFSU <em>Équilibre</em></div>
+      <div class="tagline">Yoga Viniyoga · Méditation Védique</div>
+      <div class="rule bot"></div>
+      <div class="sub">Marjorie Mathieu · Ath, Belgique</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="slide" id="s2">
+    <div class="left-bar">
+      <div class="lbl">L'enseignante</div>
+      <h2>Marjorie<em>Mathieu</em></h2>
+      <div class="rule"></div>
+      <p>Directe, honnête, sans bullshit.<br>«&nbsp;Je n'essaie pas de convaincre — j'invite.&nbsp;»</p>
+    </div>
+    <div class="right">
+      <div class="stat"><div class="stat-num">2011</div><div class="stat-text"><strong>Début de pratique yoga</strong><span>Enseigne depuis 2014 — Certifiée Viniyoga &amp; IFSU</span></div></div>
+      <div class="stat"><div class="stat-num">12</div><div class="stat-text"><strong>Ans de méditation védique IFSU</strong><span>Pratique quotidienne, matin et soir</span></div></div>
+      <div class="stat"><div class="stat-num">2</div><div class="stat-text"><strong>Ans d'enseignement en Grèce</strong><span>Yoga &amp; méditation — avant le retour à Ath</span></div></div>
+      <div class="stat"><div class="stat-num">Co-</div><div class="stat-text"><strong>Responsable IFSU Belgique</strong><span>Aux côtés de Breeyana — méthode Gururaj Ananda Yogi</span></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 -->
+  <div class="slide" id="s3">
+    <div class="bg-shape"></div>
+    <div class="header"><div class="lbl">Offre 01</div><h2>Yoga <em>Viniyoga</em></h2></div>
+    <div class="quote-block"><p>«&nbsp;Le yoga s'adapte à toi,<br>pas toi au yoga.&nbsp;»</p><cite>Krishnamacharya</cite></div>
+    <div class="principe">Principe fondamental : <em>Sthira Sukham Asanam</em> — stabilité et confort dans la posture</div>
+    <div class="schedule">
+      <div class="scard"><div class="day">Mar &amp; Jeu</div><div class="time">18h30</div><div class="loc">Chez IFSU, Ath<br>(adresse sur RDV)</div><div class="price">10 €</div><div class="maxi">max 6 pers.</div></div>
+      <div class="scard"><div class="day">Mercredi</div><div class="time">18h30</div><div class="loc">Centre Équilibre<br>Hauts-Degrés 18, Ath</div><div class="price">5 / 10 / 15 €</div><div class="maxi">tarif solidaire · max 12</div></div>
+      <div class="scard"><div class="day">Samedi</div><div class="time">10h00</div><div class="loc">Medsquare<br>Rue de la Procession, Meslin</div><div class="price">15 €</div><div class="maxi">min 8 · max 12 pers.</div></div>
+      <div class="scard"><div class="day">Sur RDV</div><div class="time">Privée</div><div class="loc">Séance individuelle<br>entièrement sur mesure</div><div class="price">65 €</div><div class="maxi">90 min · 1 pers.</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 -->
+  <div class="slide" id="s4">
+    <div class="top-bar"></div>
+    <div class="col-left">
+      <div class="lbl">Offre 02</div>
+      <h2>Méditation<em>Védique IFSU</em></h2>
+      <div class="pill-list">
+        <div class="pill"><div class="pill-dot"></div><span>Pas de la pleine conscience — ni un outil de gestion du stress</span></div>
+        <div class="pill"><div class="pill-dot"></div><span>Aucune croyance requise — l'expérience suffit</span></div>
+        <div class="pill"><div class="pill-dot"></div><span>Technique prescrite individuellement selon ton profil</span></div>
+        <div class="pill"><div class="pill-dot"></div><span>Méthode IFSU fondée en 1975 · 8 pays · 1 000+ pratiquants</span></div>
+      </div>
+    </div>
+    <div class="col-right">
+      <div class="offer-box"><h3>Session découverte</h3><div class="price-tag">Gratuite</div><p>Individuelle · sur RDV · chez IFSU, Ath · 1h30 — sans engagement</p></div>
+      <div class="offer-box"><h3>Cycle complet — 10 séances</h3><div class="price-tag">250 € <small>ou 25 €/séance</small></div><p>Individuel · à ton rythme · 4 techniques : Mantra · Tratak · Pranayama · Gurushakti</p></div>
+      <div class="offer-box"><h3>Groupe hebdomadaire</h3><div class="price-tag">Gratuit</div><p>Accès à vie après le cycle · sans limite de durée</p></div>
+      <div class="honest-line"><p>Soyons honnêtes : <strong>40 min/jour, matin et soir.</strong> Pas négociable si tu veux des résultats réels.</p></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 -->
+  <div class="slide" id="s5">
+    <div class="bg-geo"></div>
+    <div class="top-label">Événement exceptionnel</div>
+    <div class="main-title">Retraite <em>Résidentielle</em> IFSU</div>
+    <div class="info-strip">
+      <div class="info-cell"><div class="cell-lbl">Dates</div><div class="cell-val">23 – 27 nov. 2026</div><div class="cell-sub">5 jours complets</div></div>
+      <div class="info-cell"><div class="cell-lbl">Lieu</div><div class="cell-val">Koningsteen</div><div class="cell-sub">Kapelle-op-den-Bos</div></div>
+      <div class="info-cell"><div class="cell-lbl">Participation aux frais</div><div class="cell-val">750 €</div><div class="cell-sub">logement &amp; repas · ou 150 €/jour</div></div>
+      <div class="info-cell"><div class="cell-lbl">Places</div><div class="cell-val">Max 20</div><div class="cell-sub">inscription recommandée tôt</div></div>
+    </div>
+    <div class="details">
+      <div class="detail-item"><div class="detail-icon">🧘</div><div class="detail-text"><strong>Méditation védique IFSU intensive</strong><span>Sessions quotidiennes guidées par Marjorie &amp; Breeyana</span></div></div>
+      <div class="detail-item"><div class="detail-icon">🌿</div><div class="detail-text"><strong>Participation aux frais uniquement</strong><span>Logement &amp; repas couverts — aucun bénéfice, tout va aux frais réels</span></div></div>
+      <div class="detail-item"><div class="detail-icon">👥</div><div class="detail-text"><strong>Co-animé par Breeyana</strong><span>Fondatrice IFSU Belgique · enseignements directs de Gururaj Ananda Yogi</span></div></div>
+      <div class="detail-item"><div class="detail-icon">📅</div><div class="detail-text"><strong>Ouvert à tous les pratiquants IFSU</strong><span>Avoir complété le cycle de 10 séances — ou contacte Marjorie</span></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6 -->
+  <div class="slide" id="s6">
+    <div class="top-block"></div>
+    <div class="card">
+      <div class="logo-text">IFSU <em>Équilibre</em></div>
+      <div class="sub">Marjorie Mathieu · Ath, Belgique</div>
+      <div class="rule"></div>
+      <div class="contact-grid">
+        <div class="contact-row"><div class="c-label">Site</div><div class="c-val">ifsu-equilibre.be</div></div>
+        <div class="contact-row"><div class="c-label">Email</div><div class="c-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcb5baafa99cb9a8b5b7f2bfb3b1">[email&#160;protected]</a></div></div>
+        <div class="contact-row"><div class="c-label">WhatsApp</div><div class="c-val">0477 / 09.18.03</div></div>
+        <div class="contact-row"><div class="c-label">Réservation yoga</div><div class="c-val">momoyoga.com/ifsu</div></div>
+      </div>
+      <a class="booking-btn" href="https://www.ifsu-equilibre.be/" target="_blank">Réserver ou s'informer</a>
+    </div>
+    <div class="bottom-note">Session découverte méditation : gratuite · sans engagement · sur RDV</div>
+  </div>
+
+  <!-- DOTS -->
+  <div id="dots">
+    <div class="dot active" onclick="goTo(0)"></div>
+    <div class="dot" onclick="goTo(1)"></div>
+    <div class="dot" onclick="goTo(2)"></div>
+    <div class="dot" onclick="goTo(3)"></div>
+    <div class="dot" onclick="goTo(4)"></div>
+    <div class="dot" onclick="goTo(5)"></div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div id="controls">
+    <button class="ctrl-btn" onclick="prev()">&#8592;</button>
+    <button class="ctrl-btn" id="playBtn" onclick="togglePlay()">&#9646;&#9646;</button>
+    <button class="ctrl-btn" onclick="next()">&#8594;</button>
+    <div id="slide-counter">1 / 6</div>
+  </div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.dot');
+  const bar    = document.getElementById('progress-bar');
+  const counter = document.getElementById('slide-counter');
+  const playBtn = document.getElementById('playBtn');
+  let current = 0, playing = true, progressTimer = null;
+  const DURATION = 6000;
+  let elapsed = 0, lastTick = null;
+
+  function showSlide(idx) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (idx + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+    elapsed = 0;
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    if (playing) startProgress();
+  }
+  function startProgress() {
+    clearInterval(progressTimer);
+    lastTick = Date.now();
+    progressTimer = setInterval(function() {
+      var now = Date.now();
+      elapsed += now - lastTick;
+      lastTick = now;
+      var pct = Math.min((elapsed / DURATION) * 100, 100);
+      bar.style.transition = 'width 0.1s linear';
+      bar.style.width = pct + '%';
+      if (elapsed >= DURATION) { clearInterval(progressTimer); next(); }
+    }, 100);
+  }
+  function next() { showSlide(current + 1); }
+  function prev() { showSlide(current - 1); }
+  function goTo(i) { showSlide(i); }
+  function togglePlay() {
+    playing = !playing;
+    playBtn.innerHTML = playing ? '&#9646;&#9646;' : '&#9654;';
+    if (playing) { lastTick = Date.now(); startProgress(); }
+    else clearInterval(progressTimer);
+  }
+  slides[0].classList.add('active');
+  dots[0].classList.add('active');
+  startProgress();
